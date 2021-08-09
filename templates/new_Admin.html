@@ -1,0 +1,361 @@
+<!--
+=========================================================
+=========================================================
+ -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <link rel="apple-touch-icon" sizes="76x76" href="{{url_for('static', filename='assets/img/apple-icon.png')}}">
+  <link rel="icon" type="image/png" href="{{url_for('static', filename='assets/img/favicon.png')}}">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.css" rel="stylesheet">
+
+  <link type="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css">
+
+  <title>
+    Nextronic Updater
+  </title>
+  <meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport' />
+  <!--     Fonts and icons     -->
+  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
+  <!-- CSS Files -->
+  <link rel= "stylesheet" type= "text/css" href="{{url_for('static', filename='assets/css/material-dashboard.css')}}">
+
+  <!-- CSS Just for demo purpose, don't include it in your project -->
+  <link rel= "stylesheet" type= "text/css" href="{{url_for('static', filename='assets/demo/demo.css')}}" rel="stylesheet" />
+
+    <link rel=”stylesheet” href=”//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css”>
+    <link href=”//cdn.rawgit.com/Eonasdan/bootstrap-datetimepicker/e8bddc60e73c1ec2475f827be36e1957af72e2ea/build/css/bootstrap-datetimepicker.css” rel=”stylesheet”>
+
+  <style>
+          #title {
+        color : white;
+        height : 110px ;
+        background-color: grey;
+        padding :20px;
+        font-size : 25px;
+      }
+      .table-wrapper{
+    margin: 10px 70px 70px;
+    box-shadow: 0px 35px 50px rgba( 0, 0, 0, 0.2 );
+}
+
+.fl-table {
+    border-radius: 5px;
+    font-size: 12px;
+    font-weight: normal;
+    border: none;
+    border-collapse: collapse;
+    width: 100%;
+    max-width: 100%;
+    white-space: nowrap;
+    background-color: white;
+}
+
+.fl-table td, .fl-table th {
+    text-align: center;
+    padding: 8px;
+}
+
+.fl-table td {
+    border-right: 1px solid #9C27B0;
+    font-size: 12px;
+}
+
+.fl-table thead th {
+    color: #ffffff;
+    background: #9C27B0;
+}
+
+
+.fl-table thead th:nth-child(odd) {
+    color: #ffffff;
+    background: #9C27B0;
+}
+
+.fl-table tr:nth-child(even) {
+    background: #F8F8F8;
+}
+
+/* Responsive */
+
+@media (max-width: 767px) {
+    .fl-table {
+        display: block;
+        width: 100%;
+    }
+    .table-wrapper:before{
+        content: "Scroll horizontally >";
+        display: block;
+        text-align: right;
+        font-size: 11px;
+        color: black;
+        padding: 0 0 10px;
+    }
+    .fl-table thead, .fl-table tbody, .fl-table thead th {
+        display: block;
+    }
+    .fl-table thead th:last-child{
+        border-bottom: none;
+    }
+    .fl-table thead {
+        float: left;
+    }
+    .fl-table tbody {
+        width: auto;
+        position: relative;
+        overflow-x: auto;
+    }
+    .fl-table td, .fl-table th {
+        padding: 20px .625em .625em .625em;
+        height: 90px;
+        vertical-align: middle;
+        box-sizing: border-box;
+        overflow-x: hidden;
+        overflow-y: auto;
+        width: 120px;
+        font-size: 13px;
+        text-overflow: ellipsis;
+    }
+    .fl-table thead th {
+        text-align: left;
+        border-bottom: 1px solid #9C27B0;
+    }
+    .fl-table tbody tr {
+        display: table-cell;
+    }
+    .fl-table tbody tr:nth-child(odd) {
+        background: none;
+    }
+    .fl-table tr:nth-child(even) {
+        background: transparent;
+    }
+    .fl-table tr td:nth-child(odd) {
+        background: #9C27B0;
+        border-right: 1px solid ##9C27B0;
+    }
+    .fl-table tr td:nth-child(even) {
+        border-right: 1px solid ##9C27B0;
+    }
+    .fl-table tbody td {
+        display: block;
+        text-align: center;
+    }
+}
+  </style>
+</head>
+
+<body class="">
+  <div class="wrapper ">
+    <div class="sidebar" data-color="purple" data-background-color="white" data-image="../assets/img/sidebar-1.jpg">
+      <!--
+        Tip 1: You can change the color of the sidebar using: data-color="purple | azure | green | orange | danger"
+
+        Tip 2: you can also add an image using data-image tag
+    -->
+    <div class="logo"><a href="" class="simple-text logo-normal">
+          Nextronic Updater
+        </a></div>
+          <div class="sidebar-wrapper">
+        <ul class="nav">
+          <li class="nav-item active ">
+            <a class="nav-link" href="{{ url_for('adminPanel') }}">
+              <i class="material-icons">person</i>
+              <p>Admin</p>
+            </a>
+          </li>
+          <li class="nav-item ">
+            <a class="nav-link" href="{{ url_for('logout') }}">
+              <i class="material-icons">person</i>
+              <p>Log Out</p>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="main-panel">
+      <!-- Navbar -->
+      <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top ">
+        <div class="container-fluid">
+          <div class="navbar-wrapper">
+            <a class="navbar-brand" href="javascript:;">Welcome Admin {{name}}</a>
+          </div>
+<!--           <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="navbar-toggler-icon icon-bar"></span>
+            <span class="navbar-toggler-icon icon-bar"></span>
+            <span class="navbar-toggler-icon icon-bar"></span>
+          </button> -->
+          <div class="collapse navbar-collapse justify-content-end" >
+<!--             <form class="navbar-form">
+ -->              <div class="input-group no-border" style="width:450px;">
+                  <p id="realTime" class="input-group no-border" ></p>
+                  <select class="dropdown-item"  name="timeSelect" id="timeSelect" value="Select Time" onchange ="SelectTime()" style='background-color:#AAAAAA;'>
+                      <option  class="dropdown-item" name="localTime" value="local" >Local Time</option>
+                      <option class="dropdown-item" name="serverTime" value="server" >Server Time</option>
+                      </select>
+              </div>
+
+        </div>
+      </nav>
+      <!-- End Navbar -->
+      <div class="content">
+        <div class="container-fluid">
+          <div class="row">
+
+<!--  -->
+            <div class="col-md-4">
+            <div class="col-lg-3 col-md-6 col-sm-6">
+              <div class="card card-stats" style="width:1000px;height:600px;">
+                <div class="card-header card-header-success card-header-icon">
+                  <div class="card-icon">
+                    <i class="material-icons">supervised_user_circle</i>
+                  </div>
+                  <p class="card-category">Admin Panel</p>
+             <div class="table-wrapper" style="width:850px;">
+              <label for="">Upload New Firmware</label>
+
+              <form action="/uploader" method="post" enctype = "multipart/form-data">
+                      <label for="FS">Upload New FS</label>
+                      <input  id="FS" type = "file" name ="fileSystem" style="font-size:15px;width:160px;padding: 12px 20px;margin: 8px 0;border: 1px solid #ccc;border-radius: 4px; box-sizing: border-box;"/>
+                      <label for="F">Upload New Firmware</label>
+                      <input id="F" type = "file" name ="firmware" style="font-size:15px;width:160px;padding: 12px 20px;margin: 8px 0;border: 1px solid #ccc;border-radius: 4px; box-sizing: border-box;"/>     
+                      <label for="FS">Select Project Type</label>
+                       <select id="projectTypeSelect" id="deployAs" name="deployAs" style="font-size:15px;padding: 12px 20px;margin: 8px 0;border: 1px solid #ccc;border-radius: 4px; box-sizing: border-box;">
+                        <option selected="selected" name="none" value="none">Deploy As</option>
+                        {% for raw in Nodes %}
+                            <option  name="{{raw[1]}}" value="{{raw[1]}}">{{raw[1]}}</option>
+                        {% endfor %}
+                      </select>
+                      <br>
+                      <input type="submit" value="Validate" style="margin-left:30px;width:160px;font-size:10px;
+                                        background-color: #4CAF50;color: white;padding: 10px 20px;margin: 8px 0;border: none;border-radius: 4px;cursor: pointer;">
+              </form>
+            </div>
+
+            <br><br>
+          <div class="table-wrapper">
+                <table class="fl-table">
+                <thead>
+                  <th>Node MAC</th>
+                  <th>Deploy AS</th>
+                  <th>State File System Update</th>
+                  <th>State Firmware Update</th>
+                  <th>Version</th>
+
+                </thead>
+                <tbody>
+                    {% for row in Nodes %}    
+                      <tr>
+                        <td><label for="">{{row[0]}}</label></td>
+                        <td><label for="">{{row[1]}}</label></td>
+                        <td><label for="">{{row[2]}}</label></td>
+                        <td><label for="">{{row[3]}}</label></td>
+                        <td><label for="">{{row[4]}}</label></td>
+
+                    {% endfor %}
+                      </tr>
+                </tbody>
+                </table>
+        
+          </div>      
+<!--                   <h3 class="card-title">$34,245</h3>
+ -->                
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div> 
+
+
+  <!--   Core JS Files   -->
+
+   
+
+  <script>
+    $(document).ready(function() {
+      // Javascript method's body can be found in assets/js/demos.js
+      md.initDashboardPageCharts();
+
+    });
+  </script>
+ 
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/socket.io/1.3.6/socket.io.min.js"></script>
+    <script type="text/javascript" src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
+
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+            
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <!--suppress JSUnresolvedLibraryURL -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <!--suppress JSUnresolvedLibraryURL -->
+   <script>
+       var ServerTime ; 
+    
+          var setIntervalID  = setInterval(() => {
+          var row = document.getElementById("realTime");
+
+          var time = new Date();
+          var date = time.getFullYear()+'-'+(time.getMonth()+1)+'-'+time.getDate();
+          var timing = time.getHours() + ":" + time.getMinutes() + ":" + time.getSeconds();
+          time = date+' '+timing;
+          var data = time;
+          
+
+        row.innerHTML = data ; 
+        },1000 )
+    function SelectTime() 
+  {
+
+      clearInterval(setIntervalID);
+      var row = document.getElementById("realTime");
+      var zone = document.getElementById("timeSelect") ; 
+      if (zone.value == "local")
+        {
+          var time = new Date();
+
+          var date = time.getFullYear()+'-'+(time.getMonth()+1)+'-'+time.getDate();
+          var timing = time.getHours() + ":" + time.getMinutes() + ":" + time.getSeconds();
+          var time = date+' '+timing;
+
+/*        var offset = Intl.DateTimeFormat().resolvedOptions().timeZone
+          console.log(offset);   */     
+          var offset = Intl.DateTimeFormat().resolvedOptions().timeZone
+          console.log(offset);       
+          var i = document.createElement("img");
+          i.src = "/local?time="+offset;
+          data = time;
+        }
+      else if (zone.value=="server")
+       {
+          /*var i = document.createElement("img");
+          i.src = "/server";*/
+          data = ServerTime;
+        }
+
+      setInterval(() => {
+        if (zone.value == "local") 
+        {
+          var time = new Date();
+          var date = time.getFullYear()+'-'+(time.getMonth()+1)+'-'+time.getDate();
+          var timing = time.getHours() + ":" + time.getMinutes() + ":" + time.getSeconds();
+          var time = date+' '+timing;
+          data = time;
+        }
+        else if (zone.value=="server")
+        {
+          data = ServerTime;
+        }
+        row.innerHTML = data ; 
+        },1000 )
+  
+  }
+   </script>
+</body>
+</html>
